@@ -43,7 +43,8 @@ class Base():
 
     @staticmethod
     def assert_url(driver, url):
-        assert driver.current_url == url, f'Asserted url is {driver.current_url}'
+        time.sleep(2)
+        assert driver.current_url == url, f'Error! Asserted url is {driver.current_url}'
         print('Url assertion success')
 
     @staticmethod
@@ -51,6 +52,11 @@ class Base():
         assert text == element.text
         print('Text assertion success')
 
+    @staticmethod
+    def assert_link_contains(driver, text):
+        time.sleep(2)
+        assert text in driver.current_url, f'Error! Asserted url is {driver.current_url}'
+        print(f'Link contains {text}')
 
 
 

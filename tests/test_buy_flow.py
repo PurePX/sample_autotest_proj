@@ -2,6 +2,7 @@ import time
 
 from pages.accessories_page import AcessoriesPage
 from pages.mac_accessories_page import MacAcessoriesPage
+from pages.mac_display_mounts_page import MacDisplayMountsPage
 from pages.main_page import MainPage
 from base import base_class
 
@@ -11,6 +12,7 @@ def test_buy_flow():
     mp = MainPage(driver)
     ap = AcessoriesPage(driver)
     macap = MacAcessoriesPage(driver)
+    mdmp = MacDisplayMountsPage(driver)
 
     mp.open_main_page()
     time.sleep(5)
@@ -26,9 +28,9 @@ def test_buy_flow():
     base.assert_url(driver, 'https://www.apple.com/shop/mac/accessories/displays-mounts')
     print('Mac Displays and mounts catalog is opened')
 
-
-
-
+    mdmp.go_to_mac_wheels_page()
+    time.sleep(2)
+    base.assert_link_contains(driver, 'apple-mac-pro-wheels-kit')
 
 
 
