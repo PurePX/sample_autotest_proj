@@ -19,7 +19,10 @@ class MacDisplayMountsPage(Base):
     mac_compatibility_dropdown_mac_pro_option = "//label[@for='facet-13929028']"
     brand_dropdown = "//button[@id='title-:r2:-2']"
     brand_dropdown_apple_option = "//label[@for='facet-12820']"
-    mac_wheels_link = "//a[text() = 'Apple Mac Pro Wheels Kit']"
+    mac_wheels_item_card = "//div[@data-testid='product-tile'][.//*[contains(text(), 'Wheels')]]" # Not really consistent but nothing better
+    # ^ also could be transformed into something reusable when we know product naming
+    mac_wheels_link = mac_wheels_item_card + '//a'
+    mac_wheels_price = mac_wheels_item_card + '//span'
 
     
 
@@ -42,7 +45,14 @@ class MacDisplayMountsPage(Base):
 
     def get_mac_wheels_link(self):
         return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.mac_wheels_link)))
-    
+
+    def get_mac_wheels_price(self) -> float:
+        return float(WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, self.mac_wheels_price))).text[1:])
+
+    def get_mac_wheels_name(self) -> str:
+        return self.get_mac_wheels_link().text
+
+
 
 
     # Actions
@@ -64,7 +74,6 @@ class MacDisplayMountsPage(Base):
 
     def click_mac_wheels_link(self):
         self.get_mac_wheels_link().click()
-
 
     # Methods
 

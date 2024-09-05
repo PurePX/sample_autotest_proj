@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+from faker import Faker
 
 
 class Base():
@@ -19,6 +20,10 @@ class Base():
             self.driver.implicitly_wait(10)
             self.driver.get('https://www.apple.com/')
             self.actions = ActionChains(self.driver)
+
+    # Random items
+    fake = Faker()
+    fake_zip = fake.zipcode()
 
     # Locators
     navigation_bar_accessories = "//div[contains(@class, 'globalnav-item-accessories')]"
@@ -53,10 +58,11 @@ class Base():
         print('Text assertion success')
 
     @staticmethod
-    def assert_link_contains(driver, text):
+    def assert_url_contains(driver, text):
         time.sleep(2)
         assert text in driver.current_url, f'Error! Asserted url is {driver.current_url}'
         print(f'Link contains {text}')
+
 
 
 
