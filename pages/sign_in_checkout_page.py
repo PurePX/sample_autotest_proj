@@ -22,5 +22,6 @@ class SignInCheckoutPage(Base):  # Probably can be universal cart page
     # Methods
 
     def continue_as_guest(self):
+        before_url = self.driver.current_url
         self.click_continue_as_guest_btn()
-
+        self.wait_for_url_change(before_url)
