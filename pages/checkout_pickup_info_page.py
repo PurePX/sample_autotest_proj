@@ -1,11 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
 from base.base_class import Base
+from utils.data_generation import Generate
 
-
-class CheckoutPickupInfoPage(Base):
+class CheckoutPickupInfoPage(Base, Generate):
     # Locators
     someone_else_btn = ("//div[@class='rc-segmented-control-item'][.//button[@aria-checked='false']][//*[contains("
                         "text(), 'Someone else will pick it up')]]")  # Complex locator to ensure button is unchecked
@@ -55,23 +54,23 @@ class CheckoutPickupInfoPage(Base):
         self.get_someone_else_btn().click()
 
     def fill_fname_fld(self):
-        self.get_fname_fld().send_keys(self.some_user_fname)
+        self.get_fname_fld().send_keys(Generate.some_user_fname)
 
     def fill_lname_fld(self):
-        self.get_lname_fld().send_keys(self.some_user_lname)
+        self.get_lname_fld().send_keys(Generate.some_user_lname)
 
     def fill_someones_email_fld(self):
-        self.get_someones_email_fld().send_keys(self.some_user_email)
+        self.get_someones_email_fld().send_keys(Generate.some_user_email)
 
     def fill_someones_phone_fld(self):  # number is not pasting. We have to enter it num by num
-        for num in self.some_user_phone:
+        for num in Generate.some_user_phone:
             self.get_someones_phone_fld().send_keys(num)
 
     def fill_main_customer_email_fld(self):
-        self.get_main_customer_email_fld().send_keys(self.main_user_email)
+        self.get_main_customer_email_fld().send_keys(Generate.main_user_email)
 
     def fill_main_customer_phone_fld(self):  # number is not pasting. We have to enter it num by num
-        for num in self.main_user_phone:
+        for num in Generate.main_user_phone:
             self.get_main_customer_phone_fld().send_keys(num)
 
     def click_continue_to_payment_btn(self):

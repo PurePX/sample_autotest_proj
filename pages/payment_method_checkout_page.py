@@ -3,9 +3,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 from base.base_class import Base
+from utils.data_generation import Generate
 
 
-class PaymentMethodCheckoutPage(Base):
+class PaymentMethodCheckoutPage(Base, Generate):
     gained_zip_city_info = ''
     # Locators
     header = "//*[@id='rs-checkout-header']"

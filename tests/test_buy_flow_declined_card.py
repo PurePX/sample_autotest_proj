@@ -10,6 +10,8 @@ from pages.mac_wheels_page import ItemPage
 from pages.payment_method_checkout_page import PaymentMethodCheckoutPage
 from pages.sign_in_checkout_page import SignInCheckoutPage
 
+"""This test validates main purchase flow. From visiting main page to paying for item as a guest with credit card"""
+
 
 # ====== 12 failed, 88 passed in 10490.94s (2:54:50) ======
 def test_buy_flow():
@@ -90,3 +92,4 @@ def test_buy_flow():
     except Exception as e:
         base.test_failure_protocol(e)
 
+# test_buy_flow()
