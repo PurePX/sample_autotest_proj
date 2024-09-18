@@ -1,11 +1,11 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
+from utils.data_generation import Generate
 from base.base_class import Base
 
 
-class FinalConfirmationCheckoutPage(Base):
+class FinalConfirmationCheckoutPage(Base, Generate):
     # Locators
     header = "//span[@class='rs-review-header-text']"
     fulfillment_details = "//*[@id='checkout.review.fulfillmentReview.reviewGroup-1-shipquote']"
@@ -122,17 +122,17 @@ class FinalConfirmationCheckoutPage(Base):
         self.assert_text(self.get_item_name().text, catalog_name)
         self.assert_text(self.get_item_qty().text, '1')
         self.assert_price(self.get_item_price(), catalog_price)
-        self.assert_text(self.get_pickup_contact_fname().text, self.some_user_fname)
-        self.assert_text(self.get_pickup_contact_lname().text, self.some_user_lname)
-        self.assert_text(self.get_pickup_contact_email().text, self.some_user_hidden_email)
-        self.assert_text_contains(self.get_pickup_contact_phone().text, self.some_user_phone[-2:])
-        self.assert_text_contains(self.get_payment_card_number().text, self.main_user_credit_card_number[-4:])
-        self.assert_text(self.get_billing_fname().text, self.main_user_fname)
-        self.assert_text(self.get_billing_lname().text, self.main_user_lname)
-        self.assert_text(self.get_billing_address_1().text, self.main_user_billing_address_street1_address)
-        self.assert_text(self.get_billing_address_2().text, self.main_user_billing_address_street2_address)
+        self.assert_text(self.get_pickup_contact_fname().text, Generate.some_user_fname)
+        self.assert_text(self.get_pickup_contact_lname().text, Generate.some_user_lname)
+        self.assert_text(self.get_pickup_contact_email().text, Generate.some_user_hidden_email)
+        self.assert_text_contains(self.get_pickup_contact_phone().text, Generate.some_user_phone[-2:])
+        self.assert_text_contains(self.get_payment_card_number().text, Generate.main_user_credit_card_number[-4:])
+        self.assert_text(self.get_billing_fname().text, Generate.main_user_fname)
+        self.assert_text(self.get_billing_lname().text, Generate.main_user_lname)
+        self.assert_text(self.get_billing_address_1().text, Generate.main_user_billing_address_street1_address)
+        self.assert_text(self.get_billing_address_2().text, Generate.main_user_billing_address_street2_address)
         self.assert_text(f'{self.get_billing_city().text} {self.get_billing_state().text}', gained_zip_city_info)
-        self.assert_text(self.get_billing_zip().text, self.main_user_billing_address_zip)
+        self.assert_text(self.get_billing_zip().text, Generate.main_user_billing_address_zip)
         self.assert_price(self.get_subtotal(), catalog_price)
         assert self.get_tax() < catalog_price and self.get_tax() < self.get_subtotal()
         assert self.get_total() == self.get_subtotal() + self.get_tax()
